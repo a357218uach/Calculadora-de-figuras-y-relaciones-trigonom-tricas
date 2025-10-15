@@ -1,2 +1,2 @@
 # Calculadora-de-figuras-y-relaciones-trigonom-tricas
-Autor: Angel Arturo Ontiveros Berrueto 357218
+# Autor: Angel Arturo Ontiveros Berrueto 357218
