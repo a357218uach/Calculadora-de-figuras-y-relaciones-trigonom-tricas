@@ -47,26 +47,14 @@ with tabs[0]:
         area = b * h
         perimetro = 2 * (b + h)
 
-        fig, ax = plt.subplots()
-        rect = plt.Rectangle((0, 0), b, h, color=color, fill=False, linewidth=2)
-        ax.add_artist(rect)
-        ax.set_xlim(-1, b + 1)
-        ax.set_ylim(-1, h + 1)
-        ax.set_aspect('equal')
-        st.pyplot(fig)
+       
 
     elif figura == "Cuadrado":
         l = st.number_input("Lado (l)", min_value=0.0, value=2.0)
         area = l**2
         perimetro = 4 * l
 
-        fig, ax = plt.subplots()
-        sq = plt.Rectangle((0, 0), l, l, color=color, fill=False, linewidth=2)
-        ax.add_artist(sq)
-        ax.set_xlim(-1, l + 1)
-        ax.set_ylim(-1, l + 1)
-        ax.set_aspect('equal')
-        st.pyplot(fig)
+       
 
     # Mostrar resultados
     st.success(f"Área = {area:.2f}")
