@@ -35,7 +35,7 @@ with tabs[0]:
 
         # Dibujo
       
-        circle = plt.Circle((0, 0), r, color=color, fill=False, linewidth=2)
+       
         ax.add_artist(circle)
         ax.set_aspect('equal')
         ax.set_xlim(-r*1.2, r*1.2)
