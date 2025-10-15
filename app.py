@@ -1,80 +1,76 @@
-# app.py
-# -----------------------------------------------------
-# Calculadora de Figuras y Relaciones Trigonométricas
-# Curso de Programación - UACH
-# -----------------------------------------------------
+
 
 import streamlit as st
 import numpy as np
+import matplotlib.pyplot as plt
 
-# Título principal
-st.title("🧮 Calculadora de Figuras y Relaciones Trigonométricas")
+st.title("Calculadora de Figuras y Relaciones Trigonometricas")
 
 # Crear pestañas
-tabs = st.tabs(["📐 Figuras geométricas", "📊 Funciones trigonométricas"])
+tabs = st.tabs(["Figuras geometrica", "Funciones trigonometricas"])
 
-# -----------------------------------------------------
-# 🟩 PARTE 1 y 2: FIGURAS GEOMÉTRICAS
-# -----------------------------------------------------
+# PARTE 1 y 2: FIGURAS GEOMETRICAS
 with tabs[0]:
-    st.header("Cálculo de área y perímetro")
+    st.header("Calculo de area y perimetro")
 
-    # Seleccionar figura
     figura = st.selectbox(
         "Selecciona una figura:",
-        ["Círculo", "Triángulo", "Rectángulo", "Cuadrado"]
+        ["Circulo", "Triangulo", "Rectangulo", "Cuadrado"]
     )
 
     color = st.color_picker("Elige un color para la figura:", "#1f77b4")
 
-    # Variables y cálculos según figura
-    if figura == "Círculo":
-        r = st.number_input("Radio (r)", min_value=0.0, value=1.0)
-        area = np.pi * r**2
+    # Circulo
+    if figura == "Circulo":
+        r = st.number_input("Radio (r)", min_value=0.0, value=1.0, format="%.4f")
+        area = np.pi * r ** 2
         perimetro = 2 * np.pi * r
 
         # Dibujo
-      
-       
+        fig, ax = plt.subplots()
+        circle = plt.Circle((0, 0), r, color=color, fill=False, linewidth=2)
         ax.add_artist(circle)
-        ax.set_aspect('equal')
-        ax.set_xlim(-r*1.2, r*1.2)
-        ax.set_ylim(-r*1.2, r*1.2)
+        ax.set_aspect("equal")
+        ax.set_xlim(-r * 1.2, r * 1.2)
+        ax.set_ylim(-r * 1.2, r * 1.2)
         st.pyplot(fig)
 
-    elif figura == "Triángulo":
-        a = st.number_input("Lado a", min_value=0.0, value=3.0)
-        b = st.number_input("Lado b (base)", min_value=0.0, value=4.0)
-        c = st.number_input("Lado c", min_value=0.0, value=5.0)
-        h = st.number_input("Altura (h)", min_value=0.0, value=4.0)
+    # Triangulo
+    elif figura == "Triangulo":
+        a = st.number_input("Lado a", min_value=0.0, value=3.0, format="%.4f")
+        b = st.number_input("Lado b (base)", min_value=0.0, value=4.0, format="%.4f")
+        c = st.number_input("Lado c", min_value=0.0, value=5.0, format="%.4f")
+        h = st.number_input("Altura (h)", min_value=0.0, value=4.0, format="%.4f")
         area = 0.5 * b * h
         perimetro = a + b + c
 
-        # Dibujo (triángulo isósceles como referencia)
+        # Dibujo rapido (triangulo)
         fig, ax = plt.subplots()
-        x = [0, b/2, -b/2, 0]
+        x = [0, b / 2, -b / 2, 0]
         y = [0, h, 0, 0]
         ax.plot(x, y, color=color, linewidth=2)
-        ax.set_aspect('equal')
+        ax.set_aspect("equal")
         st.pyplot(fig)
 
-    elif figura == "Rectángulo":
-        b = st.number_input("Base (b)", min_value=0.0, value=4.0)
-        h = st.number_input("Altura (h)", min_value=0.0, value=2.0)
-        area = b * h
-        perimetro = 2 * (b + h)
+    # Rectangulo
+    elif figura == "Rectangulo":
+        base = st.number_input("Base (b)", min_value=0.0, value=4.0, format="%.4f")
+        altura = st.number_input("Altura (h)", min_value=0.0, value=2.0, format="%.4f")
+        area = base * altura
+        perimetro = 2 * (base + altura)
 
         fig, ax = plt.subplots()
-        rect = plt.Rectangle((0, 0), b, h, color=color, fill=False, linewidth=2)
+        rect = plt.Rectangle((0, 0), base, altura, color=color, fill=False, linewidth=2)
         ax.add_artist(rect)
-        ax.set_xlim(-1, b + 1)
-        ax.set_ylim(-1, h + 1)
-        ax.set_aspect('equal')
+        ax.set_xlim(-1, base + 1)
+        ax.set_ylim(-1, altura + 1)
+        ax.set_aspect("equal")
         st.pyplot(fig)
 
+    # Cuadrado
     elif figura == "Cuadrado":
-        l = st.number_input("Lado (l)", min_value=0.0, value=2.0)
-        area = l**2
+        l = st.number_input("Lado (l)", min_value=0.0, value=2.0, format="%.4f")
+        area = l ** 2
         perimetro = 4 * l
 
         fig, ax = plt.subplots()
@@ -82,40 +78,37 @@ with tabs[0]:
         ax.add_artist(sq)
         ax.set_xlim(-1, l + 1)
         ax.set_ylim(-1, l + 1)
-        ax.set_aspect('equal')
+        ax.set_aspect("equal")
         st.pyplot(fig)
 
-    # Mostrar resultados
-    st.success(f"Área = {area:.2f}")
-    st.success(f"Perímetro = {perimetro:.2f}")
+    # Mostrar resultados (asegurarse que area y perimetro existen)
+    try:
+        st.success("Area = {:.4f}".format(area))
+        st.success("Perimetro = {:.4f}".format(perimetro))
+    except NameError:
+        st.error("No se calcularon area o perimetro: revisa los parametros de la figura.")
 
-# -----------------------------------------------------
-# 🟦 PARTE 3: FUNCIONES TRIGONOMÉTRICAS
-# -----------------------------------------------------
+# PARTE 3: FUNCIONES TRIGONOMETRICAS
 with tabs[1]:
-    st.header("Funciones trigonométricas")
+    st.header("Funciones trigonometricas")
 
-    # Selección de función
-    funcion = st.selectbox("Selecciona una función:", ["sin(x)", "cos(x)", "tan(x)"])
+    funcion = st.selectbox("Selecciona una funcion:", ["sin(x)", "cos(x)", "tan(x)"])
     amp = st.slider("Amplitud", 0.1, 2.0, 1.0)
-    rango = st.slider("Rango (en múltiplos de π)", 1, 4, 2)
+    rango = st.slider("Rango (en multiplos de pi)", 1, 4, 2)
 
-    # Crear eje x
     x = np.linspace(0, rango * np.pi, 400)
 
-    # Evaluar función seleccionada
     if funcion == "sin(x)":
         y = amp * np.sin(x)
     elif funcion == "cos(x)":
         y = amp * np.cos(x)
     else:
         y = amp * np.tan(x)
-        y[np.abs(y) > 10] = np.nan  # limitar valores grandes
+        y[np.abs(y) > 10] = np.nan
 
-    # Graficar
     fig, ax = plt.subplots()
-    ax.plot(x, y, color="purple", linewidth=2)
-    ax.set_title(f"{funcion} con amplitud {amp}")
+    ax.plot(x, y, linewidth=2)
+    ax.set_title("{} con amplitud {}".format(funcion, amp))
     ax.set_xlabel("x (radianes)")
     ax.set_ylabel("y")
     ax.grid(True)
