@@ -10,7 +10,7 @@ import numpy as np
 
 
 st.title("Calculadora de Figuras y Relaciones Trigonométricas 🤓")
-
+st.sidebar.write("Angel Arturo Ontiveros Berrueto 357218")
 tabs = st.tabs(["📐 Figuras geométricas", "📊 Funciones trigonométricas"])
 
 # -----------------------------------------------------
