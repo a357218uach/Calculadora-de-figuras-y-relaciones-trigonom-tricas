@@ -34,7 +34,7 @@ with tabs[0]:
         perimetro = 2 * np.pi * r
 
         # Dibujo
-        fig, ax = plt.subplots()
+      
         circle = plt.Circle((0, 0), r, color=color, fill=False, linewidth=2)
         ax.add_artist(circle)
         ax.set_aspect('equal')
